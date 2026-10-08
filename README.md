@@ -1,20 +1,40 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# MediCare Connect
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+## Project Overview
+Android mobile application and responsive website for a private family clinic. The system allows patients to register, log in, book appointments, make payments, request medication, and submit feedback. Clinic staff can manage appointments and view reports through an admin dashboard.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+## Team Members
+- Hulani Hope Mashaba — ST10202512
+- Zwivhuya Prudence Maphalaphatwa — ST1045343
+- Kitso Zwane — ST10442335
+- Mankane Makinta — ST10435250
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+## Environment Requirements
+- Flutter SDK (version 3.x)
+- Android SDK (API 33+)
+- Firebase account (for authentication and database)
+- Azure DevOps account
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+## Setup and Run
+1. Clone the repository:
+   git clone <your-repo-url>
+2. Install dependencies:
+   flutter pub get
+3. Connect a physical Android device via USB with USB debugging enabled.
+4. Run the app:
+   flutter run --release
+
+## Build and Test
+- Build APK: flutter build apk
+- Run tests: flutter test
+
+## Azure DevOps
+- **Boards**: Used for task allocation and progress tracking.
+- **Repos**: Source code management with regular meaningful commits.
+- **Pipelines**: Automated build and test on every commit.
+
+## Project Structure
+- lib/ — Flutter application source code
+- test/ — Automated tests
+- assets/ — Images and static files
+- azure-pipelines.yml — CI configuration

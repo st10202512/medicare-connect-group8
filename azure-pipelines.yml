@@ -1,0 +1,27 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: FlutterInstall@1
+    displayName: 'Install Flutter'
+    inputs:
+      channel: 'stable'
+      version: 'latest'
+
+  - task: FlutterCommand@1
+    displayName: 'Flutter Pub Get'
+    inputs:
+      arguments: 'pub get'
+
+  - task: FlutterTest@1
+    displayName: 'Flutter Test'
+    inputs:
+      arguments: 'test'
+
+  - task: FlutterCommand@1
+    displayName: 'Build Debug APK'
+    inputs:
+      arguments: 'build apk --debug'

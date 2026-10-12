@@ -1,23 +1,17 @@
-trigger:
-  - main
+- task: Hey24sheep.flutter.flutter-command.FlutterCommand@0
+  displayName: 'Flutter Pub Get'
+  inputs:
+    arguments: 'pub get'
+    flutterDirectory: 'C:\flutter\bin' 
 
-pool: MyWindowsAgent
+- task: Hey24sheep.flutter.flutter-test.FlutterTest@0
+  displayName: 'Flutter Test'
+  inputs:
+    arguments: 'test'
+    flutterDirectory: 'C:\flutter\bin'
 
-steps:
-  - task: Hey24sheep.flutter.flutter-command.FlutterCommand@0
-    displayName: 'Flutter Pub Get'
-    inputs:
-      arguments: 'pub get'
-      flutterDirectory: 'C:\flutter' # <-- ADD THIS LINE
-
-  - task: Hey24sheep.flutter.flutter-test.FlutterTest@0
-    displayName: 'Flutter Test'
-    inputs:
-      arguments: 'test'
-      flutterDirectory: 'C:\flutter' # <-- ADD THIS LINE
-
-  - task: Hey24sheep.flutter.flutter-command.FlutterCommand@0
-    displayName: 'Build Debug APK'
-    inputs:
-      arguments: 'build apk --debug'
-      flutterDirectory: 'C:\flutter' # <-- ADD THIS LINE
+- task: Hey24sheep.flutter.flutter-command.FlutterCommand@0
+  displayName: 'Build Debug APK'
+  inputs:
+    arguments: 'build apk --debug'
+    flutterDirectory: 'C:\flutter\bin'

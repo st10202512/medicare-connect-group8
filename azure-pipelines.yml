@@ -7,7 +7,7 @@ steps:
   - task: Hey24sheep.flutter.flutter-env.FlutterEnv@0
     displayName: 'Set Flutter Environment'
     inputs:
-      filePath: 'C:\flutter'
+      customPath: 'C:\flutter'
 
   - task: Hey24sheep.flutter.flutter-command.FlutterCommand@0
     displayName: 'Flutter Pub Get'

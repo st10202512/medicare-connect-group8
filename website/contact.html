@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — MediCare Connect</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">MediCare Connect</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html" class="btn-outline">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="container page">
+    <h1>Contact Us</h1>
+    <p>We are here to help. Reach out to us by phone, email, or the form below.</p>
+
+    <div class="contact-info">
+      <p><strong>Phone:</strong> +27 12 345 6789</p>
+      <p><strong>Email:</strong> support@medicareconnect.co.za</p>
+      <p><strong>Address:</strong> 123 Main Road, Johannesburg</p>
+      <p><strong>Hours:</strong> Monday – Friday, 08:00 – 17:00</p>
+    </div>
+
+    <form class="contact-form" onsubmit="submitContact(event)">
+      <label>Full Name</label>
+      <input type="text" required>
+
+      <label>Email</label>
+      <input type="email" required>
+
+      <label>Message</label>
+      <textarea rows="4" required></textarea>
+
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+    <p id="contact-msg" class="success-msg"></p>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 HealthyLife Family Clinic — MediCare Connect</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

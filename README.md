@@ -55,6 +55,27 @@ HealthyLife Family Clinic is a small private medical facility offering medical c
 
 ---
 
+## Website
+
+A responsive website prototype for HealthyLife Family Clinic is included in the
+`website/` folder. It covers the pages defined in the Task 1 sitemap: Home,
+About, Services, Contact, and Login.
+
+Open `website/index.html` in any modern browser to view it. The site uses plain
+HTML, CSS, and JavaScript — no build step required.
+
+### Website pages
+
+| Page | File | Purpose |
+|---|---|---|
+| Home | `index.html` | Clinic intro and feature overview |
+| About | `about.html` | Clinic description and values |
+| Services | `services.html` | Service list with fees |
+| Contact | `contact.html` | Contact details and message form |
+| Login | `login.html` | Email/password and Google SSO placeholder |
+
+Screenshots are stored in `evidence/website/`.
+
 ## Tech Stack
 
 | Layer | Technology |

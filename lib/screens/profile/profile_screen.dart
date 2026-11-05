@@ -18,6 +18,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final _messageCtrl = TextEditingController();
   bool _isSubmitting = false;
 
+  // State for the settings toggle
+  bool _remindersEnabled = true;
+
   Future<void> _submitFeedback() async {
     if (_subjectCtrl.text.trim().isEmpty ||
         _messageCtrl.text.trim().isEmpty) {
@@ -55,6 +58,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
+            // User Profile Card
             Card(
               child: ListTile(
                 leading: const CircleAvatar(
@@ -66,6 +70,54 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             const SizedBox(height: 24),
+
+            // Settings Section
+            const Text('Settings',
+                style: TextStyle(
+                    fontSize: 16, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8),
+            Card(
+              child: SwitchListTile(
+                secondary: const Icon(Icons.notifications_outlined,
+                    color: Color(0xFF00897B)),
+                title: const Text('Appointment Reminders'),
+                subtitle: const Text('Receive reminders before your visit'),
+                value: _remindersEnabled,
+                onChanged: (bool value) {
+                  setState(() {
+                    _remindersEnabled = value;
+                  });
+                  _snack(value ? 'Reminders enabled' : 'Reminders disabled');
+                },
+              ),
+            ),
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.language, color: Color(0xFF00897B)),
+                title: const Text('Language'),
+                subtitle: const Text('English (South Africa)'),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (ctx) => AlertDialog(
+                      title: const Text('Select Language'),
+                      content: const Text(
+                          'Currently only English (South Africa) is available.'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(ctx),
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 24),
+
+            // Feedback Section
             const Text('Submit Feedback or Complaint',
                 style: TextStyle(
                     fontSize: 16, fontWeight: FontWeight.bold)),
@@ -115,6 +167,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             const SizedBox(height: 24),
+
+            // Logout Button
             SizedBox(
               width: double.infinity,
               height: 46,

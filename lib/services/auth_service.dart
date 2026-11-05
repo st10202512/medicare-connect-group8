@@ -5,10 +5,15 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
+  // Prevents concurrent Google operations (signIn/signOut overlapping)
+  bool _googleBusy = false;
+
   User? get currentUser => _auth.currentUser;
   Stream<User?> get authStateChanges => _auth.authStateChanges();
 
+  // ---------------------------------------------
   // Email + password registration
+  // ---------------------------------------------
   Future<User?> registerWithEmail({
     required String email,
     required String password,
@@ -24,7 +29,9 @@ class AuthService {
     }
   }
 
+  // ---------------------------------------------
   // Email + password login
+  // ---------------------------------------------
   Future<User?> loginWithEmail({
     required String email,
     required String password,
@@ -40,9 +47,23 @@ class AuthService {
     }
   }
 
+  // ---------------------------------------------
   // Google Sign-In (SSO)
+  // ---------------------------------------------
   Future<User?> signInWithGoogle() async {
+    if (_googleBusy) {
+      throw 'A Google sign-in is already in progress. Please wait.';
+    }
+    _googleBusy = true;
+
     try {
+      // Force a fresh state before sign-in to avoid cached operations
+      try {
+        await _googleSignIn.signOut();
+      } catch (_) {
+        // Ignore if nothing to sign out
+      }
+
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) return null;
 
@@ -60,20 +81,33 @@ class AuthService {
       throw _mapAuthError(e);
     } catch (e) {
       throw 'Google Sign-In failed. Please try again.';
+    } finally {
+      _googleBusy = false;
     }
   }
 
+  // ---------------------------------------------
+  // Sign out (email + Google)
+  // ---------------------------------------------
   Future<void> signOut() async {
-    // Attempt Google sign-out, but ignore failures (e.g., emulator without Play Services)
-    try {
-      await _googleSignIn.signOut();
-    } catch (e) {
-      print('Google sign out failed (likely no Play Services): $e');
+    // Wait briefly if a Google operation is still running
+    if (_googleBusy) {
+      await Future.delayed(const Duration(milliseconds: 500));
     }
-    // Firebase sign-out must always run
+
+    try {
+      await _googleSignIn.disconnect();
+    } catch (e) {
+      // Ignore Google failure — Firebase sign-out must still run
+      print('Google disconnect failed (likely no Play Services): $e');
+    }
+
     await _auth.signOut();
   }
 
+  // ---------------------------------------------
+  // Error mapping
+  // ---------------------------------------------
   String _mapAuthError(FirebaseAuthException e) {
     switch (e.code) {
       case 'weak-password':

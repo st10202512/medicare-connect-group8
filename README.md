@@ -52,8 +52,26 @@ HealthyLife Family Clinic is a small private medical facility offering medical c
 - Help & Support card on the profile screen
 - Input validation on every form to prevent crashes
 - Firebase Firestore for all persistent data
+- Settings menu with notification toggle and language selector
 
----
+### Version 1.1.0 — Task 3 Update
+
+**New Features:**
+- Added Settings menu to Profile screen
+- Notification reminders toggle
+- Language selector (English SA)
+
+**Documentation Improvements:**
+- Complete user manual included in Task 3 report
+- Relational database structure documented with primary and foreign keys
+- Enlarged screenshots for clarity
+- GitHub repository linked with complete README
+
+**Bug Fixes (from Task 2 feedback):**
+- Lecturer access to Azure DevOps re-verified
+- Google Sign-In concurrency error resolved with busy-flag guard
+- Logout now fully clears Firebase and Google sessions
+
 
 ## Website
 

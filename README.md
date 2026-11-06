@@ -36,7 +36,14 @@ HealthyLife Family Clinic is a small private medical facility offering medical c
 | Mankane Makinta | ST10435250 | QA Tester & Secretary |
 
 ---
+## Project Links
 
+| Link | URL |
+|---|---|
+| GitHub Repository |https://github.com/st10202512/medicare-connect-group8.git |
+| Azure DevOps Project | https://dev.azure.com/ST10202512/MediCareConnect |
+| Azure Pipelines | https://dev.azure.com/ST10202512/MediCareConnect/_build |
+| Demo Video | https://youtu.be/YOUR_VIDEO_ID |
 ## Features
 
 - User registration and login with Firebase Authentication

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Dashboard — MediCare Connect</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js"></script>
+</head>
+<body onload="checkSession('doctor'); displayUserEmail('user-email');">
+  <header>
+    <div class="container nav">
+      <div class="logo">MediCare Connect</div>
+      <nav>
+        <a href="#" onclick="logout()" class="btn-outline">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="container page">
+    <div class="dashboard-header">
+      <h1>Doctor Dashboard</h1>
+      <p>Welcome, Dr. <span id="user-email">Doctor</span></p>
+    </div>
+
+    <h2 style="margin-bottom: 20px;">Today's Appointments</h2>
+    
+    <div class="list-item">
+      <div>
+        <strong>Patient:</strong> John Doe<br>
+        <strong>Reason:</strong> Headache
+      </div>
+      <button class="btn" style="padding: 8px 16px; font-size: 14px;">Prescribe</button>
+    </div>
+
+    <div class="list-item">
+      <div>
+        <strong>Patient:</strong> Jane Smith<br>
+        <strong>Reason:</strong> Diabetes follow-up
+      </div>
+      <button class="btn" style="padding: 8px 16px; font-size: 14px;">Prescribe</button>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 HealthyLife Family Clinic — MediCare Connect</p>
+    </div>
+  </footer>
+</body>
+</html>

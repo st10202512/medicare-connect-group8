@@ -35,19 +35,22 @@ android {
     // Configure the signing configs
     signingConfigs {
         create("release") {
-            keyAlias = keystoreProperties["keyAlias"] as String?
-            keyPassword = keystoreProperties["keyPassword"] as String?
-            storeFile = keystoreProperties["storeFile"]?.let { file(it) }
-            storePassword = keystoreProperties["storePassword"] as String?
+            // Only assign if the properties are not null
+            if (keystoreProperties.containsKey("keyAlias")) {
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+                storeFile = file(keystoreProperties["storeFile"] as String)
+                storePassword = keystoreProperties["storePassword"] as String
+            }
         }
     }
 
     buildTypes {
         release {
-            // Use the release signing config instead of debug
+            // Use the release signing config
             signingConfig = signingConfigs.getByName("release")
 
-            // Optional: Disable minification for now to prevent build issues
+            // Disable minification to prevent build issues
             isMinifyEnabled = false
             isShrinkResources = false
         }
@@ -63,3 +66,6 @@ kotlin {
 flutter {
     source = "../.."
 }
+
+// Fix for the "prepareKotlinBuildScriptModel not found" error
+tasks.register("prepareKotlinBuildScriptModel") {}

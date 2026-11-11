@@ -3,6 +3,8 @@ import '../../services/auth_service.dart';
 import '../../widgets/custom_button.dart';
 import 'register_screen.dart';
 import '../home/home_screen.dart';
+import '../admin/admin_dashboard_screen.dart'; // Import new screen
+import '../doctor/doctor_dashboard_screen.dart'; // Import new screen
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -22,15 +24,38 @@ class _LoginScreenState extends State<LoginScreen> {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _isLoading = true);
     try {
+      // 1. Login
       await _authService.loginWithEmail(
         email: _emailCtrl.text,
         password: _passwordCtrl.text,
       );
+
+      final user = _authService.currentUser;
+      if (user == null) return;
+
+      // 2. Get Role
+      final role = await _authService.getUserRole(user.uid);
+
       if (!mounted) return;
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
-      );
+
+      // 3. Route based on Role
+      if (role == 'admin') {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const AdminDashboardScreen()),
+        );
+      } else if (role == 'doctor') {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const DoctorDashboardScreen()),
+        );
+      } else {
+        // Default to patient home screen
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const HomeScreen()),
+        );
+      }
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context)
@@ -45,6 +70,9 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       final user = await _authService.signInWithGoogle();
       if (user == null || !mounted) return;
+
+      // Default Google users to patient dashboard
+      // (You could also check Firestore role here if needed)
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const HomeScreen()),

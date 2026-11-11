@@ -22,28 +22,35 @@
 
   <section class="container page">
     <h1>Contact Us</h1>
-    <p>We are here to help. Reach out to us by phone, email, or the form below.</p>
+    <p style="text-align: center; margin-bottom: 30px;">We are here to help. Reach out by phone, email, or the form below.</p>
 
-    <div class="contact-info">
-      <p><strong>Phone:</strong> +27 12 345 6789</p>
-      <p><strong>Email:</strong> support@medicareconnect.co.za</p>
-      <p><strong>Address:</strong> 123 Main Road, Johannesburg</p>
-      <p><strong>Hours:</strong> Monday – Friday, 08:00 – 17:00</p>
+    <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+      <div style="flex: 1; min-width: 300px;">
+        <div class="contact-info">
+          <p><strong>Phone:</strong> +27 12 345 6789</p>
+          <p><strong>Email:</strong> support@medicareconnect.co.za</p>
+          <p><strong>Address:</strong> 123 Main Road, Johannesburg</p>
+          <p><strong>Hours:</strong> Monday – Friday, 08:00 – 17:00</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=600&q=80" alt="Clinic" style="width: 100%; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+      </div>
+      
+      <div style="flex: 1; min-width: 300px;">
+        <form class="contact-form" onsubmit="submitContact(event)">
+          <label>Full Name</label>
+          <input type="text" required>
+
+          <label>Email</label>
+          <input type="email" required>
+
+          <label>Message</label>
+          <textarea rows="4" required></textarea>
+
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+        <p id="contact-msg" class="success-msg"></p>
+      </div>
     </div>
-
-    <form class="contact-form" onsubmit="submitContact(event)">
-      <label>Full Name</label>
-      <input type="text" required>
-
-      <label>Email</label>
-      <input type="email" required>
-
-      <label>Message</label>
-      <textarea rows="4" required></textarea>
-
-      <button type="submit" class="btn">Send Message</button>
-    </form>
-    <p id="contact-msg" class="success-msg"></p>
   </section>
 
   <footer>

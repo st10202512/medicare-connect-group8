@@ -20,8 +20,8 @@
     </div>
   </header>
 
-  <section class="container page auth">
-    <h1>Sign in to your account</h1>
+  <section class="container page">
+    <h1 style="text-align: center;">Sign in to your account</h1>
 
     <form class="auth-form" onsubmit="validateLogin(event)">
       <label>Email</label>
@@ -30,12 +30,16 @@
       <label>Password</label>
       <input type="password" id="login-password" required minlength="6">
 
-      <button type="submit" class="btn">Login</button>
-      <button type="button" class="btn-outline" onclick="googleSignIn()">Sign in with Google</button>
-    </form>
+      <label>Login As</label>
+      <select id="login-role" required>
+        <option value="patient">Patient</option>
+        <option value="doctor">Doctor</option>
+        <option value="admin">Admin</option>
+      </select>
 
+      <button type="submit" class="btn">Login</button>
+    </form>
     <p id="login-msg" class="success-msg"></p>
-    <p>Don't have an account? <a href="login.html">Create one</a></p>
   </section>
 
   <footer>

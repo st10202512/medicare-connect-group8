@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "157276279952-midsu5msnotj9dn7kpgv85baeaugpgj8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.medicareconnect.medicare_connect",
+            "certificate_hash": "1b0ae199f8f0c4b53cae0f6816494fef7a57cc62"
+          }
+        },
+        {
           "client_id": "157276279952-l6vs1iasf8kn37ttm7vf3vbad5fhin98.apps.googleusercontent.com",
           "client_type": 3
         }

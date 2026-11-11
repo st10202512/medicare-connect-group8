@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; // Added for role checking
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -44,6 +45,22 @@ class AuthService {
       return result.user;
     } on FirebaseAuthException catch (e) {
       throw _mapAuthError(e);
+    }
+  }
+
+  // ---------------------------------------------
+  // Get User Role from Firestore
+  // ---------------------------------------------
+  Future<String?> getUserRole(String uid) async {
+    try {
+      final doc = await FirebaseFirestore.instance.collection('users').doc(uid).get();
+      if (doc.exists) {
+        return doc.data()?['role'] as String?;
+      }
+      return null;
+    } catch (e) {
+      print('Error fetching role: $e');
+      return null;
     }
   }
 

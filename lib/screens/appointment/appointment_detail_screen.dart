@@ -31,15 +31,39 @@ class AppointmentDetailScreen extends StatelessWidget {
                       _row('Date', data['date'] ?? ''),
                       _row('Time', data['timeSlot'] ?? ''),
                       _row('Reason', data['reason'] ?? ''),
-                      _row('Status', data['status'] ?? ''),
+                      _row('Status', (data['status'] ?? '').toString().toUpperCase()),
                       _row('Amount',
                           'R${(data['amount'] ?? 0).toStringAsFixed(2)}'),
+                      if (data['prescription'] != null && data['prescription'].toString().isNotEmpty) ...[
+                        const Divider(),
+                        const Text(
+                          'Doctor\'s Prescription',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF00897B),
+                            fontSize: 16,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFE0F2F1),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            data['prescription'],
+                            style: const TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
+                          ),
+                        ),
+                      ],
                     ],
                   ),
                 ),
               ),
               const SizedBox(height: 24),
-              if ((data['status'] ?? '') != 'cancelled')
+              if ((data['status'] ?? '') != 'cancelled' && (data['status'] ?? '') != 'completed')
                 SizedBox(
                   width: double.infinity,
                   height: 48,

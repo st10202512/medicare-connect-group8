@@ -54,6 +54,58 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  // NEW: Reminder banner widget
+  Widget _reminderBanner() {
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection('reminders')
+          .orderBy('sentAt', descending: true)
+          .limit(1)
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          return const SizedBox.shrink(); // Hide if no reminders
+        }
+
+        final data = snapshot.data!.docs.first.data() as Map<String, dynamic>;
+        final message = data['message'] ?? '';
+
+        return Container(
+          width: double.infinity,
+          margin: const EdgeInsets.only(bottom: 20),
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: const Color(0xFFE0F2F1), // Light teal background
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: const Color(0xFF00897B)),
+          ),
+          child: Row(
+            children: [
+              const Icon(Icons.campaign, color: Color(0xFF00897B), size: 30),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Clinic Announcement',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF00897B),
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(message, style: const TextStyle(fontSize: 14)),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   Widget _dashboard() {
     final user = FirebaseAuth.instance.currentUser;
     final displayName =
@@ -73,6 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
+            _reminderBanner(), // <-- ADDED HERE
             Text(
               'Welcome, $displayName',
               style:
@@ -268,16 +321,27 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  // Handles the 3-stage workflow statuses
   Widget _statusChip(String status) {
-    final color = status == 'confirmed'
-        ? Colors.green
-        : status == 'cancelled'
-        ? Colors.red
-        : Colors.orange;
+    Color color;
+    switch (status.toLowerCase()) {
+      case 'approved':
+        color = Colors.green;
+        break;
+      case 'completed':
+        color = Colors.blue;
+        break;
+      case 'cancelled':
+        color = Colors.red;
+        break;
+      default: // pending
+        color = Colors.orange;
+    }
     return Chip(
       label: Text(
-        status,
-        style: const TextStyle(color: Colors.white, fontSize: 11),
+        status.toUpperCase(),
+        style: const TextStyle(
+            color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
       ),
       backgroundColor: color,
       padding: EdgeInsets.zero,

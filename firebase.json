@@ -1,1 +1,39 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"medicare-connect-4edec","appId":"1:157276279952:android:2a1a84fdf981ffbf03f415","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"medicare-connect-4edec","configurations":{"android":"1:157276279952:android:2a1a84fdf981ffbf03f415","ios":"1:157276279952:ios:ceb78a3166df12be03f415","macos":"1:157276279952:ios:ceb78a3166df12be03f415","web":"1:157276279952:web:ff1a5a3e108ff7fa03f415","windows":"1:157276279952:web:925dcbab64fa05e403f415"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "medicare-connect-4edec",
+          "appId": "1:157276279952:android:2a1a84fdf981ffbf03f415",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "medicare-connect-4edec",
+          "configurations": {
+            "android": "1:157276279952:android:2a1a84fdf981ffbf03f415",
+            "ios": "1:157276279952:ios:ceb78a3166df12be03f415",
+            "macos": "1:157276279952:ios:ceb78a3166df12be03f415",
+            "web": "1:157276279952:web:ff1a5a3e108ff7fa03f415",
+            "windows": "1:157276279952:web:925dcbab64fa05e403f415"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

@@ -12,9 +12,14 @@ val newBuildDir: Directory =
 rootProject.layout.buildDirectory.value(newBuildDir)
 
 subprojects {
-    val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
-    project.layout.buildDirectory.value(newSubprojectBuildDir)
+    // Only override the build directory for projects inside our main folder.
+    // This prevents the "different roots" crash for plugins loaded from the Pub cache.
+    if (project.projectDir.absolutePath.startsWith(rootProject.projectDir.absolutePath)) {
+        val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
+        project.layout.buildDirectory.value(newSubprojectBuildDir)
+    }
 }
+
 subprojects {
     project.evaluationDependsOn(":app")
 }

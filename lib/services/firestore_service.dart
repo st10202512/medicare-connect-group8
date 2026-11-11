@@ -43,8 +43,9 @@ class FirestoreService {
       'date': date,
       'timeSlot': timeSlot,
       'reason': reason,
-      'status': status,
+      'status': 'pending', // <-- UPDATED: Always starts as pending
       'amount': amount,
+      'prescription': '', // <-- NEW: Empty prescription field
       'createdAt': FieldValue.serverTimestamp(),
     });
     return doc.id;
